@@ -1,0 +1,5 @@
+dic = {
+    "hurensohn": [],
+    "apfel": "banane"
+}
+

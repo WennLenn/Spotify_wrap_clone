@@ -12,6 +12,12 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     scope="user-top-read"
 ))
 
-results = sp.current_user_top_artists(limit=20)
+with open("spotidata.json", "r") as f:
+    spotidata = json.load(f)
+
+
+results = sp.current_user_top_artists(limit=10)
 for idx, artist in enumerate(results["items"], 1):
-    print(idx, artist["name"])
+    with open("spotidata.json", "w",) as f:
+        spotidata.insert(idx, artist)
+        print(idx)
