@@ -3,10 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Example Flask App</title>
+    <title>Top 10 Artists</title>
   </head>
   <body>
-    <h1>Welcome to the Example Flask App</h1>
-    <p>This app is served by <code>src/example_app.py</code>.</p>
+    <h1>Top 10 Artists</h1>
+    <p>This page uses data from <code>spotidata.json</code>.</p>
+    <ol>
+      {% for artist in artists %}
+        <li>{{ artist }}</li>
+      {% endfor %}
+    </ol>
   </body>
 </html>
