@@ -18,6 +18,10 @@ with open("spotidata.json", "r") as f:
 
 results = sp.current_user_top_artists(limit=10)
 for idx, artist in enumerate(results["items"], 1):
-    with open("spotidata.json", "w",) as f:
-        spotidata.insert(idx, artist)
-        print(idx)
+    top_art_arr = spotidata["top_art"] #(ich)
+    top_art_arr.insert(idx, artist["name"])
+
+
+with open("spotidata.json", "w",) as f:
+    spotidata["top_art"] = top_art_arr
+    json.dump(spotidata, f, indent=2)
