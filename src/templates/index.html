@@ -11,14 +11,24 @@
   <body>
     <div class="page">
       <section class="hero">
-        <h1>Top 10 Artists</h1>
-        <p>Your favorite artists from Spotify data</p>
+        <h1>Top 10 Spotify Picks</h1>
+        <p>Your favorite artists and songs from Spotify data</p>
       </section>
 
       <div class="card">
+        <h2>Top Artists</h2>
         <ol class="artist-list">
           {% for artist in artists %}
             <li class="artist-item">{{ artist }}</li>
+          {% endfor %}
+        </ol>
+      </div>
+
+      <div class="card">
+        <h2>Top Songs</h2>
+        <ol class="song-list">
+          {% for song in songs %}
+            <li class="song-item">{{ song }}</li>
           {% endfor %}
         </ol>
       </div>

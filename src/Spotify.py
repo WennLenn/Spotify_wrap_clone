@@ -19,17 +19,26 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
 with open("spotidata.json", "r") as f:
     spotidata = json.load(f)
 
-# request top 10 artists
-results = sp.current_user_top_artists(limit=10)
-for idx, artist in enumerate(results["items"], 1):
-    top_art_arr = spotidata["top_art"] 
-    top_art_arr.insert(idx, artist["name"])
-
-
-# save the top 10 to a json file
-with open("spotidata.json", "w",) as f:
+limit = 10
+# gettop x artists
+def top_art():
+    results = sp.current_user_top_artists(limit=limit)
+    top_art_arr = [artist["name"] for artist in results["items"]]
     spotidata["top_art"] = top_art_arr
-    json.dump(spotidata, f, indent=2)
-    print(spotidata["top_art"])
     
+    with open("spotidata.json", "w", encoding="utf-8") as f:
+        json.dump(spotidata, f, indent=2)
+
+# get top x songs
+def top_songs():
+    results = sp.current_user_top_tracks(limit=limit)
+    top_songs_arr = [song["name"] for song in results["items"]]
+    spotidata["top_songs"] = top_songs_arr
+
+    with open("spotidata.json", "w", encoding="utf-8") as f:
+        json.dump(spotidata, f, indent=2)
+
+top_art()
+top_songs()
+# run the web app
 app.run()

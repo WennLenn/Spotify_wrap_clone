@@ -12,7 +12,8 @@ def index():
         data = json.load(f)
 
     artists = data.get('top_art', [])[:10]
-    return render_template('index.html', artists=artists)
+    songs = data.get('top_songs', [])[:10]
+    return render_template('index.html', artists=artists, songs=songs)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
