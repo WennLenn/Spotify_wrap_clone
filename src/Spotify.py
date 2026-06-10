@@ -25,9 +25,11 @@ for idx, artist in enumerate(results["items"], 1):
     top_art_arr = spotidata["top_art"] 
     top_art_arr.insert(idx, artist["name"])
 
+
 # save the top 10 to a json file
 with open("spotidata.json", "w",) as f:
     spotidata["top_art"] = top_art_arr
     json.dump(spotidata, f, indent=2)
+    print(spotidata["top_art"])
     
 app.run()
