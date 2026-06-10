@@ -6,12 +6,19 @@
     <title>Top 10 Artists</title>
   </head>
   <body>
-    <h1>Top 10 Artists</h1>
-    <p>This page uses data from <code>spotidata.json</code>.</p>
-    <ol>
-      {% for artist in artists %}
-        <li>{{ artist }}</li>
-      {% endfor %}
-    </ol>
+    <div class="page">
+      <section class="hero">
+        <h1>Top 10 Artists</h1>
+        <p>Your favorite artists from Spotify data</p>
+      </section>
+
+      <div class="card">
+        <ol class="artist-list">
+          {% for artist in artists %}
+            <li class="artist-item">{{ artist }}</li>
+          {% endfor %}
+        </ol>
+      </div>
+    </div>
   </body>
 </html>
