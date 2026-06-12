@@ -40,5 +40,6 @@ def top_songs():
 
 top_art()
 top_songs()
+
 # run the web app
 app.run()
