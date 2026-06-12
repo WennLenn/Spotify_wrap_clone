@@ -1,37 +1,112 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta font-family="Inter", sans-serif>
-    <meta line-height: 1.6>
-    <meta color: #333333>
-    <title>Top 10 Artists</title>
-  </head>
-  <body>
-    <div class="page">
-      <section class="hero">
-        <h1>Top 10 Spotify Picks</h1>
-        <p>Your favorite artists and songs from Spotify data</p>
-      </section>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spoty Stats</title>
+  <style>
+    :root{
+      --bg:#121212;
+      --panel:#181818;
+      --muted:#b3b3b3;
+      --accent:#1db954;
+      --glass: rgba(255,255,255,0.03);
+      --card: #282828;
+      --radius:12px;
+      --gap:18px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);color:#fff}
+    .app{display:flex;min-height:100vh}
+    /* Sidebar */
+    .sidebar{width:220px;background:linear-gradient(180deg,var(--panel),#0f0f0f);padding:24px;box-sizing:border-box}
+    .logo{font-weight:700;font-size:20px;color:var(--accent);margin-bottom:18px}
+    .nav{display:flex;flex-direction:column;gap:10px}
+    .nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px}
+    .nav a:hover{color:#fff;background:var(--glass)}
 
-      <div class="card">
-        <h2>Top Artists</h2>
-        <ol class="artist-list">
-          {% for artist in artists %}
-            <li class="artist-item">{{ artist }}</li>
-          {% endfor %}
-        </ol>
+    /* Main */
+    .main{flex:1;padding:28px;box-sizing:border-box}
+    .header{display:flex;align-items:end;justify-content:space-between;gap:20px}
+    .title{font-size:28px;font-weight:700}
+    .sub{color:var(--muted);font-size:14px}
+
+    .content{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:20px}
+
+    /* Artists grid */
+    .artists{background:var(--card);padding:18px;border-radius:var(--radius)}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .card{display:flex;align-items:center;gap:12px;padding:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:10px}
+    .avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#333,#111);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:20px}
+    .artist-name{font-weight:600}
+    .artist-rank{color:var(--muted);font-size:12px}
+
+    /* Songs panel */
+    .songs{background:var(--card);padding:18px;border-radius:var(--radius)}
+    .track{display:flex;gap:12px;align-items:center;padding:8px 6px;border-radius:8px}
+    .track:hover{background:var(--glass)}
+    .track-num{width:28px;color:var(--muted);text-align:right}
+    .track-name{font-weight:600}
+    .track-sub{color:var(--muted);font-size:12px}
+
+    @media(max-width:900px){
+      .content{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(1,1fr)}
+      .sidebar{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">SpotyStats</div>
+      <nav class="nav">
+        <a href="#">Home</a>
+        <a href="#">Search</a>
+        <a href="#">Your Library</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="header">
+        <div>
+          <div class="title">Your Top 10 — Summary</div>
+          <div class="sub">A quick look at your most played artists and tracks</div>
+        </div>
       </div>
 
-      <div class="card">
-        <h2>Top Songs</h2>
-        <ol class="song-list">
-          {% for song in songs %}
-            <li class="song-item">{{ song }}</li>
-          {% endfor %}
-        </ol>
+      <div class="content">
+        <section class="artists">
+          <h2 style="margin:0 0 12px 0">Top Artists</h2>
+          <div class="grid">
+            {% for artist in artists %}
+            <div class="card">
+              <div class="avatar">{{ artist[:1]|upper }}</div>
+              <div>
+                <div class="artist-name">{{ artist }}</div>
+                <div class="artist-rank">#{{ loop.index }}</div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+
+        <aside class="songs">
+          <h3 style="margin:0 0 12px 0">Top Tracks</h3>
+          <div>
+            {% for song in songs %}
+            <div class="track">
+              <div class="track-num">{{ loop.index }}</div>
+              <div>
+                <div class="track-name">{{ song }}</div>
+                <div class="track-sub">{{ "-" }}</div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </aside>
       </div>
-    </div>
-  </body>
+    </main>
+  </div>
+</body>
 </html>
