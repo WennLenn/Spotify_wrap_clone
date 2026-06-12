@@ -32,6 +32,7 @@ def top_art():
 # get top x songs
 def top_songs():
     results = sp.current_user_top_tracks(limit=limit)
+    print(results)
     top_songs_arr = [song["name"] for song in results["items"]]
     spotidata["top_songs"] = top_songs_arr
 
